@@ -1,0 +1,33 @@
+name: weekly-report
+# Runs every Monday at 07:00 UTC, rebuilds the report from data/campaign.csv
+# and commits it back, so the latest report is always in reports/.
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+  push:
+    paths: ["data/**"]
+permissions:
+  contents: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[ai]"
+      - name: Build report
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "$ANTHROPIC_API_KEY" ]; then FLAG="--ai-summary"; fi
+          python -m autopilot data/campaign.csv --name "Nordlys Skin · Autumn launch" $FLAG
+      - name: Commit report
+        run: |
+          git config user.name "report-bot"
+          git config user.email "report-bot@users.noreply.github.com"
+          git add reports/
+          git diff --cached --quiet || git commit -m "Weekly report $(date -u +%F)"
+          git push

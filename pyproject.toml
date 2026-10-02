@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "campaign-report-autopilot"
+version = "0.1.0"
+description = "Weekly influencer-campaign reports with scale/keep/cut recommendations, built automatically by GitHub Actions."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Vishwajeet Kumbhar" }]
+dependencies = []
+
+[project.optional-dependencies]
+ai = ["anthropic>=0.40"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+campaign-report = "autopilot.__main__:main"
+
+[tool.setuptools]
+packages = ["autopilot"]
