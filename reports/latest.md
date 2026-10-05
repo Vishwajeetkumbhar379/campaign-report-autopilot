@@ -1,5 +1,5 @@
 # Nordlys Skin · Autumn launch · weekly creator report
-_Week of 28 September 2026 · generated automatically_
+_Week of 05 October 2026 · generated automatically_
 
 ## Headline numbers
 
