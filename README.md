@@ -2,6 +2,8 @@
 
 **The Monday client report, written before anyone opens a laptop.**
 
+![Real output from the sample data included in this repo](docs/demo.png)
+
 Influencer campaign reporting usually means an afternoon of copying numbers into a spreadsheet and writing the same summary email. This repo does it automatically: every Monday a GitHub Action reads the campaign data, calculates the metrics clients care about, decides which creators to **scale, keep, test or cut**, and commits a fresh report to [`reports/latest.md`](reports/latest.md) (plus an [HTML version](reports/latest.html) ready to email).
 
 With an Anthropic API key, Claude also writes the client summary paragraph, using only the computed numbers.
